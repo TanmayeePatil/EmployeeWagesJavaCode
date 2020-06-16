@@ -2,31 +2,53 @@ import java.util.Random;
 
 public class EmployeeWageComputation{
 
- EmployeeWageComputation()
+ int empWagePerHrs,empHrs,empSalary;
+
+ //Default Constructor
+ public EmployeeWageComputation()
+ { }
+
+ //Parameterized constructor
+ public EmployeeWageComputation(int wagePerHrs, int Hrs)
  {
-   System.out.println("Default Constructor called");
+      empWagePerHrs=wagePerHrs;
+      empHrs=Hrs;
+      empSalary=0;
  }
 
- public void empAttendance()
+ public int empAttendance()
  {
    Random myRan=new Random();
    int myRanVar=myRan.nextInt(2);
    System.out.println("Random Integers: "+myRanVar);
+   return myRanVar;
+ }
 
-      if(myRanVar==0)
-       {
-         System.out.println("Employee Absent");
-       }
-      else
-       {
-         System.out.println("Employee Present");
-       }
+ public void calSalary()
+ {
+   empSalary=empWagePerHrs*empHrs;
+   System.out.println("Salary of the employee:" + empSalary);
  }
 
  public static void main (String args[]){
+     System.out.println("---------------------------------------------------");
      System.out.println("WELCOME TO EMPLOYEE WAGE PROBLEM");
+     System.out.println("---------------------------------------------------");
      EmployeeWageComputation ewc=new EmployeeWageComputation();
-     ewc.empAttendance();
+     int resultAttendance=ewc.empAttendance();
+     if(resultAttendance==0)
+       {
+         System.out.println("Employee is Absent");
+         EmployeeWageComputation ewc1=new EmployeeWageComputation(20,0);
+         ewc1.calSalary();
+       }
+      else
+       {
+         System.out.println("Employee is Present");
+         EmployeeWageComputation ewc1=new EmployeeWageComputation(20,8);
+         ewc1.calSalary();
+       }
  }
 
 }
+
