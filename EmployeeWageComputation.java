@@ -36,24 +36,25 @@ public class EmployeeWageComputation{
      System.out.println("---------------------------------------------------");
      EmployeeWageComputation ewc=new EmployeeWageComputation();
      int resultAttendance=ewc.empAttendance();
-     if(resultAttendance==0)
-       {
-         System.out.println("Employee is Absent");
-         EmployeeWageComputation ewc1=new EmployeeWageComputation(20,0);
-         ewc1.calSalary();
-       }
-    if(resultAttendance==1)
-       {
-         System.out.println("Employee is Present: PART TIME");
-         EmployeeWageComputation ewc1=new EmployeeWageComputation(20,4);
-         ewc1.calSalary();
-       }
-   if(resultAttendance==2)
-       {
-         System.out.println("Employee is Present: FULL TIME");
-         EmployeeWageComputation ewc1=new EmployeeWageComputation(20,8);
-         ewc1.calSalary();
-       }
+
+     switch(resultAttendance){
+           case 0:
+         	  System.out.println("Employee is Absent");
+                  EmployeeWageComputation ewc0=new EmployeeWageComputation(20,0);
+                  ewc0.calSalary();
+                  break;
+           case 1:
+                  System.out.println("Employee is Present: PART TIME");
+                  EmployeeWageComputation ewc1=new EmployeeWageComputation(20,4);
+                  ewc1.calSalary();
+                  break;
+           case 2:
+                  System.out.println("Employee is Present: FULL TIME");
+                  EmployeeWageComputation ewc2=new EmployeeWageComputation(20,8);
+                  ewc2.calSalary();
+                  break;
+          default : System.out.println("Invalid");
+     }
  }
 
 }
