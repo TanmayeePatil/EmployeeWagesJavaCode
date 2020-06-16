@@ -19,7 +19,7 @@ public class EmployeeWageComputation{
  public int empAttendance()
  {
    Random myRan=new Random();
-   int myRanVar=myRan.nextInt(2);
+   int myRanVar=myRan.nextInt(3);
    System.out.println("Random Integers: "+myRanVar);
    return myRanVar;
  }
@@ -42,9 +42,15 @@ public class EmployeeWageComputation{
          EmployeeWageComputation ewc1=new EmployeeWageComputation(20,0);
          ewc1.calSalary();
        }
-      else
+    if(resultAttendance==1)
        {
-         System.out.println("Employee is Present");
+         System.out.println("Employee is Present: PART TIME");
+         EmployeeWageComputation ewc1=new EmployeeWageComputation(20,4);
+         ewc1.calSalary();
+       }
+   if(resultAttendance==2)
+       {
+         System.out.println("Employee is Present: FULL TIME");
          EmployeeWageComputation ewc1=new EmployeeWageComputation(20,8);
          ewc1.calSalary();
        }
