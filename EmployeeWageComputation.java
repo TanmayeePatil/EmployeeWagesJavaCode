@@ -3,59 +3,63 @@ import java.util.Random;
 
 public class EmployeeWageComputation{
 
- int empWagePerHrs,empHrs,empSalary;
+ int empWagePerHrs,empHrs,empSalary,daysPerMonth,TotalEmpSalary;
 
- //Default Constructor
- public EmployeeWageComputation()
- { }
-
- //Parameterized constructor
- public EmployeeWageComputation(int wagePerHrs, int Hrs)
+ //constructor
+ public EmployeeWageComputation(int wagePerHrs, int monthDays)
  {
-      empWagePerHrs=wagePerHrs;
-      empHrs=Hrs;
-      empSalary=0;
+   this.empWagePerHrs=wagePerHrs;
+   this.daysPerMonth=monthDays;
  }
 
  public int empAttendance()
  {
    Random myRan=new Random();
    int myRanVar=myRan.nextInt(3);
-   System.out.println("Random Integers: "+myRanVar);
+   System.out.println("\nRandom Integers: "+myRanVar);
    return myRanVar;
  }
 
  public void calSalary()
  {
-   empSalary=empWagePerHrs*empHrs;
-   System.out.println("Salary of the employee:" + empSalary);
+    empHrs=0;
+    empSalary=0;
+    TotalEmpSalary=0;
+
+    for(int i=1;i<=daysPerMonth;i++)
+    {
+      int resultAttendance=empAttendance();
+
+      switch(resultAttendance){
+           case 0:
+                  System.out.println("Employee is Absent");
+                  empHrs=0;
+                  break;
+           case 1:
+                  System.out.println("Employee is Present: PART TIME");
+                  empHrs=4;
+                  break;
+           case 2:
+                  System.out.println("Employee is Present: FULL TIME");
+                  empHrs=8;
+                  break;
+          default : System.out.println("Invalid");
+      }
+     empSalary=empWagePerHrs*empHrs;
+     System.out.println("DAY"+i+" : Salary of employee: "+empSalary);
+     TotalEmpSalary=empSalary+TotalEmpSalary;
+    }
+
+    System.out.println("----------------------------------------------");
+    System.out.println("Total Monthly Salary: "+ TotalEmpSalary);
  }
 
  public static void main (String args[]){
      System.out.println("---------------------------------------------------");
      System.out.println("WELCOME TO EMPLOYEE WAGE PROBLEM");
      System.out.println("---------------------------------------------------");
-     EmployeeWageComputation ewc=new EmployeeWageComputation();
-     int resultAttendance=ewc.empAttendance();
-
-     switch(resultAttendance){
-           case 0:
-         	  System.out.println("Employee is Absent");
-                  EmployeeWageComputation ewc0=new EmployeeWageComputation(20,0);
-                  ewc0.calSalary();
-                  break;
-           case 1:
-                  System.out.println("Employee is Present: PART TIME");
-                  EmployeeWageComputation ewc1=new EmployeeWageComputation(20,4);
-                  ewc1.calSalary();
-                  break;
-           case 2:
-                  System.out.println("Employee is Present: FULL TIME");
-                  EmployeeWageComputation ewc2=new EmployeeWageComputation(20,8);
-                  ewc2.calSalary();
-                  break;
-          default : System.out.println("Invalid");
-     }
+     EmployeeWageComputation ewc=new EmployeeWageComputation(20,20);
+     ewc.calSalary();
  }
 
 }
