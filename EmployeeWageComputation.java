@@ -3,14 +3,20 @@ import java.util.Random;
 
 public class EmployeeWageComputation{
 
- int empWagePerHrs,empHrs,empSalary,daysPerMonth,TotalEmpSalary,totalMaxHr,i,totalHr;
+ private final int empWagePerHrs;
+ private final int daysPerMonth;
+ private final int totalMaxHr;
+ private final int partTimeHrs;
+ private final int fullTimeHrs;
 
  //constructor
- public EmployeeWageComputation(int wagePerHrs, int monthDays, int maxHrs)
+ public EmployeeWageComputation(int empWagePerHrs, int daysPerMonth, int totalMaxHr, int partTimeHrs, int fullTimeHrs)
  {
-   this.empWagePerHrs=wagePerHrs;
-   this.daysPerMonth=monthDays;
-   this.totalMaxHr=maxHrs;
+   this.empWagePerHrs=empWagePerHrs;
+   this.daysPerMonth=daysPerMonth;
+   this.totalMaxHr=totalMaxHr;
+   this.partTimeHrs=partTimeHrs;
+   this.fullTimeHrs=fullTimeHrs;
  }
 
  public int empAttendance()
@@ -23,11 +29,7 @@ public class EmployeeWageComputation{
 
  public void calSalary()
  {
-    empHrs=0;
-    empSalary=0;
-    TotalEmpSalary=0;
-    totalHr=0;
-    i=0;
+    int empHrs=0,empSalary=0,TotalEmpSalary=0,totalHr=0,i=0;
 
     while(totalHr <= totalMaxHr && i < daysPerMonth)
     {
@@ -40,11 +42,11 @@ public class EmployeeWageComputation{
                   break;
            case 1:
                   System.out.println("Employee is Present: PART TIME");
-                  empHrs=4;
+                  empHrs=partTimeHrs;
                   break;
            case 2:
                   System.out.println("Employee is Present: FULL TIME");
-                  empHrs=8;
+                  empHrs=fullTimeHrs;
                   break;
           default : System.out.println("Invalid");
       }
@@ -63,7 +65,7 @@ public class EmployeeWageComputation{
      System.out.println("---------------------------------------------------");
      System.out.println("WELCOME TO EMPLOYEE WAGE PROBLEM");
      System.out.println("---------------------------------------------------");
-     EmployeeWageComputation ewc=new EmployeeWageComputation(20,20,100);
+     EmployeeWageComputation ewc=new EmployeeWageComputation(20,20,100,4,8);
      ewc.calSalary();
  }
 
