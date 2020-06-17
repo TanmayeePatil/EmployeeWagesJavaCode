@@ -3,13 +3,14 @@ import java.util.Random;
 
 public class EmployeeWageComputation{
 
- int empWagePerHrs,empHrs,empSalary,daysPerMonth,TotalEmpSalary;
+ int empWagePerHrs,empHrs,empSalary,daysPerMonth,TotalEmpSalary,totalMaxHr,i,totalHr;
 
  //constructor
- public EmployeeWageComputation(int wagePerHrs, int monthDays)
+ public EmployeeWageComputation(int wagePerHrs, int monthDays, int maxHrs)
  {
    this.empWagePerHrs=wagePerHrs;
    this.daysPerMonth=monthDays;
+   this.totalMaxHr=maxHrs;
  }
 
  public int empAttendance()
@@ -25,11 +26,13 @@ public class EmployeeWageComputation{
     empHrs=0;
     empSalary=0;
     TotalEmpSalary=0;
+    totalHr=0;
+    i=0;
 
-    for(int i=1;i<=daysPerMonth;i++)
+    while(totalHr <= totalMaxHr && i < daysPerMonth)
     {
       int resultAttendance=empAttendance();
-
+      i++;
       switch(resultAttendance){
            case 0:
                   System.out.println("Employee is Absent");
@@ -45,20 +48,22 @@ public class EmployeeWageComputation{
                   break;
           default : System.out.println("Invalid");
       }
-     empSalary=empWagePerHrs*empHrs;
-     System.out.println("DAY"+i+" : Salary of employee: "+empSalary);
-     TotalEmpSalary=empSalary+TotalEmpSalary;
+     totalHr=totalHr+empHrs;
+     System.out.println("DAY"+i+" : Empolyee Hours: "+empHrs);
+     //empSalary=empWagePerHrs*totalHr;
+     //TotalEmpSalary=empSalary+TotalEmpSalary;
     }
-
+    empSalary=empWagePerHrs*totalHr;
     System.out.println("----------------------------------------------");
-    System.out.println("Total Monthly Salary: "+ TotalEmpSalary);
+    System.out.println("Total Hours: "+ totalHr);
+    System.out.println("Total Salary: "+ empSalary);
  }
 
  public static void main (String args[]){
      System.out.println("---------------------------------------------------");
      System.out.println("WELCOME TO EMPLOYEE WAGE PROBLEM");
      System.out.println("---------------------------------------------------");
-     EmployeeWageComputation ewc=new EmployeeWageComputation(20,20);
+     EmployeeWageComputation ewc=new EmployeeWageComputation(20,20,100);
      ewc.calSalary();
  }
 
