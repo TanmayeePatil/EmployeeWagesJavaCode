@@ -11,12 +11,15 @@ class ComanyWiseWage implements EmpWageBuilder{
 
     @Override
     public void calSalary(List<EmployeeBuilder> empBuild) {
-    int i,empSalary;
+    int i;
+    List<String> dailySalaryWage = new ArrayList<>();
 
        for(i=0;i<empBuild.size();i++)
        {
-        int totalHr=0,numDays=0;
+        int totalHr=0,numDays=0,dailyEmpSalary=0,empTotalSalary=0;
         int absentCount=0,partPresentCount=0,fullPresentCount=0,empHrs=1;
+
+        System.out.println("Company Name: "+ empBuild.get(i).companyName);
 
         while(totalHr<=empBuild.get(i).totalMaxHr && numDays<empBuild.get(i).daysPerMonth)
         {
@@ -39,13 +42,22 @@ class ComanyWiseWage implements EmpWageBuilder{
               default : System.out.println("Invalid");
           }
          totalHr=totalHr+empHrs;
+         dailyEmpSalary=empHrs*empBuild.get(i).empWagePerHrs;
+         //System.out.println("Day"+numDays+": Daily Wage:"+ dailyEmpSalary);
+         empTotalSalary=empTotalSalary+dailyEmpSalary;
+         String result=empBuild.get(i).companyName+" Day"+numDays+": Daily Wage:"+ dailyEmpSalary;
+         dailySalaryWage.add(result);
         }
-        empSalary=empBuild.get(i).empWagePerHrs*totalHr;
-        System.out.println("Company Name: "+ empBuild.get(i).companyName);
+        String result1=empBuild.get(i).companyName+": TOTAL WAGE:"+ empTotalSalary;
+        dailySalaryWage.add(result1);
         System.out.printf("Absent Days:%-5d PartTime Days:%-5d FullTimeDays:%d",absentCount,partPresentCount,fullPresentCount);
-        System.out.println("\nTotal salary for "+numDays+" days or "+totalHr+" working hours is:"+ empSalary);
+        System.out.println("\nTotal salary for "+numDays+" days or "+totalHr+" working hours is:"+ empTotalSalary);
         System.out.println("------------------------------------------------------------------------------");
        }
+       //To print all values of arraylist
+       //dailySalaryWage.forEach((name) -> {
+       //    System.out.println(name);
+       // });
     }
 }
 
