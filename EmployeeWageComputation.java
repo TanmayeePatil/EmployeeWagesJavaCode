@@ -1,49 +1,56 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class EmployeeWageComputation {
+interface EmpWageBuilder{
+  public void calSalary(EmployeeBuilder[] empBuild); //interface method
+}
 
- int empWagePerHrs;
- int daysPerMonth;
- int totalMaxHr;
+class ComanyWiseWage implements EmpWageBuilder{
 
- public void calSalary(EmployeeBuilder[] empBuild)
- {
-   int empHrs=0,empSalary=0,totalHr=0,numDays=0,absentCount=0,partPresentCount=0,fullPresentCount=0;
+    @Override
+    public void calSalary(EmployeeBuilder[] empBuild) {
+    int i,empSalary,totalHr,numDays;
+    int absentCount=0,partPresentCount=0,fullPresentCount=0,empHrs=1;
 
-   for (int i=0;i<empBuild.length;i++)
-   {
-    while(totalHr<=empBuild[i].totalMaxHr && numDays<empBuild[i].daysPerMonth)
-    {
-      Random myRan=new Random();
-      int resultAttendance=myRan.nextInt(3);
-      numDays++;
-      switch(resultAttendance){
-           case 0://System.out.println("Employee is ABSENT");
-                  empHrs=0;
-                  absentCount++;
-                  break;
-           case 1://System.out.println("Employee is PRESENT: PART TIME");
-                  empHrs=4;
-                  partPresentCount++;
-                  break;
-           case 2://System.out.println("Employee is PRESENT: FULL TIME");
-                  empHrs=8;
-                  fullPresentCount++;
-                  break;
-          default : System.out.println("Invalid");
-      }
-     totalHr=totalHr+empHrs;
+       for(i=0;i<empBuild.length;i++)
+       {
+        totalHr=0;
+        numDays=0;
+        empSalary=0;
+
+        while(totalHr<=empBuild[i].totalMaxHr && numDays<empBuild[i].daysPerMonth)
+        {
+          Random myRan=new Random();
+          int resultAttendance=myRan.nextInt(3);
+          numDays++;
+          switch(resultAttendance){
+               case 0://System.out.println("Employee is ABSENT");
+                      empHrs=0;
+                      absentCount++;
+                      break;
+               case 1://System.out.println("Employee is PRESENT: PART TIME");
+                      empHrs=4;
+                      partPresentCount++;
+                      break;
+               case 2://System.out.println("Employee is PRESENT: FULL TIME");
+                      empHrs=8;
+                      fullPresentCount++;
+                      break;
+              default : System.out.println("Invalid");
+          }
+         totalHr=totalHr+empHrs;
+        }
+        empSalary=empBuild[i].empWagePerHrs*totalHr;
+        System.out.println("Company Name: "+ empBuild[i].companyName);
+        System.out.printf("Absent Days:%-5d PartTime Days:%-5d FullTimeDays:%d",absentCount,partPresentCount,fullPresentCount);
+        System.out.println("\nTotal salary for "+numDays+" days or "+totalHr+" working hours is:"+ empSalary);
+        System.out.println("------------------------------------------------------------------------------");
+       }
     }
-    empSalary=empBuild[i].empWagePerHrs*totalHr;
-    System.out.println("Company Name: "+ empBuild[i].companyName);
-    System.out.printf("Absent Days:%-5d PartTime Days:%-5d FullTimeDays:%d",absentCount,partPresentCount,fullPresentCount);
-    System.out.println("\nTotal salary for "+numDays+" days or "+totalHr+" working hours is:"+ empSalary);
-    System.out.println("------------------------------------------------------------------------------");
-    totalHr=0;
-    numDays=0;
-   }
- }
+
+}
+
+public class EmployeeWageComputation {
 
  public static void main (String args[]){
      System.out.println("------------------------------------------------------------------------------");
@@ -72,7 +79,7 @@ public class EmployeeWageComputation {
             empBuild[i]=ewcArr;
         }
       System.out.println("---------------------------- WAGE CALCULATION --------------------------------");
-      EmployeeWageComputation ewc=new EmployeeWageComputation();
-      ewc.calSalary(empBuild);
+      ComanyWiseWage cw=new ComanyWiseWage();
+      cw.calSalary(empBuild);
  }
 }
