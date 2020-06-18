@@ -9,14 +9,12 @@ class ComanyWiseWage implements EmpWageBuilder{
 
     @Override
     public void calSalary(EmployeeBuilder[] empBuild) {
-    int i,empSalary,totalHr,numDays;
-    int absentCount=0,partPresentCount=0,fullPresentCount=0,empHrs=1;
+    int i;
 
        for(i=0;i<empBuild.length;i++)
        {
-        totalHr=0;
-        numDays=0;
-        empSalary=0;
+        int totalHr=0,numDays=0,empSalary=0;
+        int absentCount=0,partPresentCount=0,fullPresentCount=0,empHrs=1;
 
         while(totalHr<=empBuild[i].totalMaxHr && numDays<empBuild[i].daysPerMonth)
         {
