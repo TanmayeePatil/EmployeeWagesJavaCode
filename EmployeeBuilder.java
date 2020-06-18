@@ -4,8 +4,6 @@ public class EmployeeBuilder{
  int empWagePerHrs;
  int daysPerMonth;
  int totalMaxHr;
- int partTimeHrs;
- int fullTimeHrs;
 
         //Setters and Getters
 	public String getCompanyName(){
@@ -24,14 +22,6 @@ public class EmployeeBuilder{
 		return totalMaxHr;
 	}
 
-	public int getPartTimeHrs(){
-		return partTimeHrs;
-	}
-
-	public int getFullTimeHrs(){
-		return fullTimeHrs;
-	}
-
 	public void setCompanyName(String companyName){
 		this.companyName=companyName;
 	}
@@ -48,11 +38,12 @@ public class EmployeeBuilder{
 		this.totalMaxHr=totalMaxHr;
 	}
 
-	public void setPartTimeHrs(int partTimeHrs){
-		this.partTimeHrs=partTimeHrs;
-	}
-
-	public void setFullTimeHrs(int fullTimeHrs){
-		this.fullTimeHrs=fullTimeHrs;
-	}
+    public EmployeeBuilder(String cName, int ewph,int monthDays,int tmh) {
+    super();
+    companyName=cName;
+    empWagePerHrs=ewph;
+    daysPerMonth=monthDays;
+    totalMaxHr=tmh;
+   }
+   public EmployeeBuilder(){}
 }
