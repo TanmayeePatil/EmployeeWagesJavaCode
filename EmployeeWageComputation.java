@@ -9,10 +9,12 @@ public class EmployeeWageComputation {
 
  public void calSalary(EmployeeBuilder[] empBuild)
  {
-   int empHrs=0,empSalary=0,totalHr=0,numDays=0,absentCount=0,partPresentCount=0,fullPresentCount=0;
+   int empHrs=0,empSalary=0;
 
    for (int i=0;i<empBuild.length;i++)
    {
+    int totalHr=0,numDays=0,absentCount=0,partPresentCount=0,fullPresentCount=0;
+
     while(totalHr<=empBuild[i].totalMaxHr && numDays<empBuild[i].daysPerMonth)
     {
       Random myRan=new Random();
