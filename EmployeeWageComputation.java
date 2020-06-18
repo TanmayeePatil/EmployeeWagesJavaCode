@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -11,8 +12,10 @@ class ComanyWiseWage implements EmpWageBuilder{
 
     @Override
     public void calSalary(List<EmployeeBuilder> empBuild) {
-    int i;
-    List<String> dailySalaryWage = new ArrayList<>();
+     int i;
+     List<String> dailySalaryWage = new ArrayList<>();
+     HashMap<String,Integer> companyWage=new HashMap<>();
+     Scanner sc = new Scanner(System.in);
 
        for(i=0;i<empBuild.size();i++)
        {
@@ -53,11 +56,19 @@ class ComanyWiseWage implements EmpWageBuilder{
         System.out.printf("Absent Days:%-5d PartTime Days:%-5d FullTimeDays:%d",absentCount,partPresentCount,fullPresentCount);
         System.out.println("\nTotal salary for "+numDays+" days or "+totalHr+" working hours is:"+ empTotalSalary);
         System.out.println("------------------------------------------------------------------------------");
+        companyWage.put(empBuild.get(i).companyName, empTotalSalary);
        }
-       //To print all values of arraylist
-       //dailySalaryWage.forEach((name) -> {
-       //    System.out.println(name);
-       // });
+       System.out.println("\n--------------------- SEARCH RECORD BY COMANY NAME ---------------------------");
+       System.out.println("Enter the Comapny Name for search:");
+       String searchCompany=sc.next();
+
+        if(companyWage.containsKey(searchCompany)){
+            System.out.println("Company Name: "+ searchCompany);
+            System.out.println("Total Employee Wage: "+companyWage.get(searchCompany));
+        }else{
+            System.out.println("Company "+searchCompany+" not found");
+        }
+       System.out.println("------------------------------------------------------------------------------");
     }
 }
 
